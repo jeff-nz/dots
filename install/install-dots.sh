@@ -4,5 +4,5 @@ RDIR="$( dirname "$SOURCE" )"
 OS=`uname -s`
 #sudo apt-get update
 
-echo $RDIR'/../files' 
+cd $RDIR'/../files' 
 stow -vt ~/. .
