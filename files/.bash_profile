@@ -6,6 +6,8 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
+# Alias
+alias myip='ifconfig | grep -Eo '"'"'inet (addr:)?([0-9]*\.){3}[0-9]*'"'"' | grep -Eo '"'"'([0-9]*\.){3}[0-9]*'"'"' | grep -v '"'"'127.0.0.1'"'"''
 
 # Show always fullpath on terminal
 git_branch () { git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'; }
