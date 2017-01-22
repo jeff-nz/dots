@@ -6,8 +6,11 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-# Alias
-alias myip="ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"
+
+#LS Colors 
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
+
 
 # Show always fullpath on terminal
 git_branch () { git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'; }
@@ -17,9 +20,14 @@ export PS1='\[\033[33;1m\]\u\[\033[m\]@\H [\[\033[36m\]\w\[\033[m\]]'$BRANCH'\n$
 
 #export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
 
+
 if [ -e /usr/share/terminfo/x/xterm-256color ]; then
         export TERM='xterm-256color'
 else
         export TERM='xterm-color'
 fi
 
+
+# Alias
+alias ls='ls -GFh'
+alias myip="ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"
