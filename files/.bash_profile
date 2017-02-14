@@ -6,11 +6,12 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
+OS=`uname -s`
+DISTRIB_ID=$(lsb_release -si)
 
 #LS Colors 
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
-
 
 # Show always fullpath on terminal
 git_branch () { git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'; }
@@ -29,6 +30,6 @@ fi
 
 
 # Alias
-alias ls='ls -GFh'
+alias ls='ls -Fh'
 alias myip="ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"
 alias ls-portlisten='netstat -ntlp | grep LISTEN'
