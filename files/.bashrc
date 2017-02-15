@@ -35,6 +35,13 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
+
+if [ -e /usr/share/terminfo/x/xterm-256color ]; then
+        TERM='xterm-256color'
+else
+        TERM='xterm-color'
+fi
+
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
@@ -55,6 +62,7 @@ if [ -n "$force_color_prompt" ]; then
 	color_prompt=
     fi
 fi
+
 
 # Show always fullpath on terminal
 git_branch () { git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/  '; }
@@ -99,20 +107,9 @@ if ! shopt -oq posix; then
 fi
 
 
-
-#LS Colors 
+#LS Colors
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
-
-#export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;                 1m\]\w\[\033[m\]\$ "
-
-
-if [ -e /usr/share/terminfo/x/xterm-256color ]; then
-        TERM='xterm-256color'
-else
-        TERM='xterm-color'
-fi
-
 
 
 # Alias
