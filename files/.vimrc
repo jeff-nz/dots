@@ -6,7 +6,7 @@
 " On pressing tab, insert 4 spaces
 
 " Turn on line numbering. Turn it off with "set nonu" 
-set number
+"set number
 
 " Set syntax on
 syntax on
