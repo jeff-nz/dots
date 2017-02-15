@@ -125,6 +125,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+alias cls='clear'
 alias ll='ls -alF'
 alias lla='ls -laF'
 alias la='ls -A'
