@@ -1,0 +1,8 @@
+[user]
+	email = mista.jeff@live.com
+	name = Jeff
+[github]
+	user = jeff-nz
+[merge]
+	renormalize = true
+	renamelimit = 4170

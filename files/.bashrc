@@ -129,5 +129,5 @@ alias ll='ls -alF'
 alias lla='ls -laF'
 alias la='ls -A'
 alias l='ls -CF'
-alias myip="ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"
-alias ls-portlisten='netstat -ntlp | grep LISTEN'
+alias my-ip="ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"
+alias my-portlisten='netstat -ntlp | grep LISTEN'
