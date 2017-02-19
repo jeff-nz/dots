@@ -1,6 +1,6 @@
 #!/bin/bash
 SOURCE="${BASH_SOURCE[0]}"
-RDIR="$( dirname "$SOURCE" )"
+RDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 OS=`uname -s`
 DISTRIB_ID=$(lsb_release -si)
 tmpDir=$RDIR'/tmp'
@@ -40,4 +40,3 @@ for i in $( ls -a $RDIR'/files' ); do
         ln -s $RDIR'/files/'$i $HOME'/'$i
     fi
 done
-
