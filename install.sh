@@ -1,3 +1,4 @@
+#!/bin/bash
 SOURCE="${BASH_SOURCE[0]}"
 RDIR="$( dirname "$SOURCE" )"
 OS=`uname -s`
