@@ -4,6 +4,9 @@
 "filetype plugin indent on
 " when indenting with '>', use 4 spaces width
 " On pressing tab, insert 4 spaces
+set tabstop=4
+set shiftwidth=4
+set expandtab
 
 " Turn on line numbering. Turn it off with "set nonu" 
 "set number
@@ -21,6 +24,7 @@ set hls
 set lbr
 
 set t_Co=256
+
 
 " Change colorscheme from default to delek
 "colorscheme delek

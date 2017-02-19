@@ -1,0 +1,24 @@
+#!/bin/bash
+
+###################
+#Definition of the function
+# @param 1 - requires full path
+###################
+getEntityType() {
+if [ ! -z "$1" ]; then
+    local i=$1
+    loopvar=$i
+    if [ -L "$loopvar" ]; then
+        printf "LINK";
+    else
+        if [ -d "$loopvar" ]; then
+            printf "DIR";
+        fi;
+        if [ -f "$loopvar" ]; then
+            printf "FILE";
+        fi;
+    fi;
+fi;
+}
+
+

@@ -1,5 +1,5 @@
 # dots
 
-## Requirements
-<pre><code>sudo apt-get install stow
+<pre><code>
+bash install.sh
 </code></pre>
