@@ -1,3 +1,5 @@
+[push]
+    default = simple
 [user]
 	email = mista.jeff@live.com
 	name = Jeff
