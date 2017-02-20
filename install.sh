@@ -2,13 +2,12 @@
 SOURCE="${BASH_SOURCE[0]}"
 RDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 OS=`uname -s`
-DISTRIB_ID=$(lsb_release -si)
 tmpDir=$RDIR'/tmp'
 
 . $RDIR'/files/bin/functions'
 
 
-if [ "$DISTRIB_ID" == "Ubuntu" ]; then
+if [ "$OS" != "Darwin" ]; then
     read -p "Run system update now?(Y/N) " -n 1 -r
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
