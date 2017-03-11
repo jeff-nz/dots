@@ -126,6 +126,10 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 alias cls='clear'
+alias dock-stop='docker stop $(docker ps -qa)'
+alias dock-rm-containers='dock-stop; docker rm $(docker ps -aq)'
+alias dock-rm-images='dock-rm-containers;docker rm $(docker images -aq); docker rmi -f $(docker images -qa)'
+alias dockc='docker-compose'
 alias ll='ls -alF'
 alias lla='ls -laF'
 alias la='ls -AF'
