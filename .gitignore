@@ -1,4 +1,4 @@
-.netrwhist
+*.netrwhist
 tmp/*
 files/.vim/.netrwhist
 files/.vim/bundle

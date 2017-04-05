@@ -27,7 +27,7 @@ for i in $( ls -a $RDIR'/files' ); do
         filePath=$HOME'/'$i
 
        # printf '\n=============\n'$filePath'\n'
-	    entityType=$(getEntityType $filePath)
+	    entityType=$(jyGetEntityType $filePath)
         if [ "$entityType" == "LINK" ]; then
             unlink $filePath
         else

@@ -4,7 +4,7 @@
 #Definition of the function
 # @param 1 - requires full path
 ###################
-getEntityType() {
+jyGetEntityType() {
 if [ ! -z "$1" ]; then
     local i=$1
     loopvar=$i
@@ -20,5 +20,4 @@ if [ ! -z "$1" ]; then
     fi;
 fi;
 }
-
 
