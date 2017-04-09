@@ -119,7 +119,7 @@ if [ -d $HOME"/go" ]; then
         export GOPATH=$HOME/projects/go
         export GOBIN=$GOPATH/bin
     else 
-        echo "Please create a folder in "$PWD/projects/go" for go workspace"
+        echo "Please create a folder in "$HOME/projects/go" for go workspace"
     fi
 else
     echo "Please install extract go in "$HOME/go;
