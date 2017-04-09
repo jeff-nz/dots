@@ -111,6 +111,21 @@ fi
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 
+#GOLANG
+if [ -d $HOME"/go" ]; then
+    export GOROOT=$HOME/go
+    export PATH=$PATH:$GOROOT/bin
+    if [ -d $PWD"/projects/go" ]; then
+        export GOPATH=$PWD/projects/go
+        export GOBIN=$GOPATH/bin
+    else 
+        echo "Please create a folder in "$PWD/projects/go" for go workspace"
+    fi
+else
+    echo "Please install extract go in "$HOME/go;
+fi
+
+
 
 # Alias
 # enable color support of ls and also add handy aliases
