@@ -115,8 +115,8 @@ export LSCOLORS=ExFxBxDxCxegedabagacad
 if [ -d $HOME"/go" ]; then
     export GOROOT=$HOME/go
     export PATH=$PATH:$GOROOT/bin
-    if [ -d $PWD"/projects/go" ]; then
-        export GOPATH=$PWD/projects/go
+    if [ -d $HOME"/projects/go" ]; then
+        export GOPATH=$HOME/projects/go
         export GOBIN=$GOPATH/bin
     else 
         echo "Please create a folder in "$PWD/projects/go" for go workspace"
