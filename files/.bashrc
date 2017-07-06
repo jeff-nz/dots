@@ -2,6 +2,8 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+export PATH=${PATH}:${HOME}/bin
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -101,7 +103,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
 
 #LS Colors
 export CLICOLOR=1

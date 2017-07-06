@@ -4,7 +4,7 @@ RDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 OS=`uname -s`
 tmpDir=$RDIR'/tmp'
 
-. $RDIR'/files/bin/functions'
+. $RDIR'/files/bin/jy_getentitytype'
 
 
 if [ "$OS" != "Darwin" ]; then
