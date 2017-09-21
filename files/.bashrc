@@ -117,3 +117,5 @@ fi
 
 
 
+alias xm='ssh -F $HOME/.ssh/xm/config'
+alias xms='scp -F $HOME/.ssh/xm/config'
