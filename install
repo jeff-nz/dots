@@ -26,7 +26,7 @@ for i in $( ls -a $RDIR'/files' ); do
     if [ $i != '.' ] && [ $i != '..' ]; then
         filePath=$HOME'/'$i
 
-       # printf '\n=============\n'$filePath'\n'
+        printf '\n=============\n'$filePath'\n'
 	    entityType=$(jyGetEntityType $filePath)
         if [ "$entityType" == "LINK" ]; then
             unlink $filePath
