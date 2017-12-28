@@ -1,16 +1,16 @@
 OS=`uname -s`;
 #GOLANG
-if [ -d $HOME"/go" ]; then
-    export GOROOT=$HOME/go
-    export PATH=$PATH:$GOROOT/bin
-    if [ -d $HOME"/projects/go" ]; then
-        export GOPATH=$HOME/projects/go
-        export GOBIN=$GOPATH/bin
+if [ -d ${HOME}"/apps/go" ]; then
+    export GOROOT=${HOME}/apps/go
+    export PATH=${PATH}:${GOROOT}/bin
+    if [ -d ${HOME}"/projects/go" ]; then
+        export GOPATH=${HOME}/projects/go
+        export GOBIN=${GOPATH}/bin
     else
-        echo "Please create a folder in "$HOME/projects/go" for go workspace"
+        echo "Please create a folder in "${HOME}/projects/go" for go workspace"
     fi
 else
-    echo "Please install extract go in "$HOME/go;
+    echo "Please install extract go in "${HOME}/apps/go;
 fi
 
 

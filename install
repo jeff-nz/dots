@@ -7,35 +7,35 @@ tmpDir=$RDIR'/tmp'
 . $RDIR'/files/bin/jy_getentitytype'
 
 
-if [ "$OS" != "Darwin" ]; then
+if [ "${OS}" != "Darwin" ]; then
     read -p "Run system update now?(Y/N) " -n 1 -r
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
        printf '\nproceeding with update...\n'
-       sudo apt-get update
+       sudo pacman -Syu
     else
        printf '\nproceeding with no update...\n'
     fi
 fi
 
-if [ ! -d "$tmpDir" ]; then
-    mkdir $tmpDir 
+if [ ! -d "${tmpDir}" ]; then
+    mkdir ${tmpDir}
 fi
 
-for i in $( ls -a $RDIR'/files' ); do
-    if [ $i != '.' ] && [ $i != '..' ]; then
-        filePath=$HOME'/'$i
+for i in $( ls -a ${RDIR}'/files' ); do
+    if [ ${i} != '.' ] && [ ${i} != '..' ]; then
+        filePath=${HOME}'/'${i}
 
-        printf '\n=============\n'$filePath'\n'
-	    entityType=$(jyGetEntityType $filePath)
-        if [ "$entityType" == "LINK" ]; then
-            unlink $filePath
+        printf '\n=============\n'${filePath}'\n'
+	    entityType=$(jyGetEntityType ${filePath})
+        if [ "${entityType}" == "LINK" ]; then
+            unlink ${filePath}
         else
-            if [ -d "$filePath" ] || [ -f "$filePath" ]; then
-                mv $filePath $tmpDir
+            if [ -d "${filePath}" ] || [ -f "${filePath}" ]; then
+                mv ${filePath} ${tmpDir}
             fi
         fi
 
-        ln -s $RDIR'/files/'$i $HOME'/'$i
+        ln -s ${RDIR}'/files/'${i} ${HOME}'/'${i}
     fi
 done

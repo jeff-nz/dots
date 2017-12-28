@@ -113,9 +113,3 @@ export LSCOLORS=ExFxBxDxCxegedabagacad
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
-
-
-
-
-alias xm='ssh -F $HOME/.ssh/xm/config'
-alias xms='scp -F $HOME/.ssh/xm/config'
