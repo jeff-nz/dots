@@ -2,6 +2,7 @@ OS=`uname -s`;
 #GOLANG
 if [ -d ${HOME}"/apps/go" ]; then
     export GOROOT=${HOME}/apps/go
+    export GOROOT_BOOTSTRAP=${GOROOT}
     export PATH=${PATH}:${GOROOT}/bin
     if [ -d ${HOME}"/projects/go" ]; then
         export GOPATH=${HOME}/projects/go
@@ -35,8 +36,8 @@ alias dockc='docker-compose'
 #REQUIRES docker pull golang
 alias dock-go='docker run --rm -v "$PWD":/app -w /app golang:latest go'
 
-alias ll='ls -alF'
-alias lla='ls -laF'
+alias ll='ls -alFh'
+alias lla='ls -laFh'
 alias la='ls -AF'
 alias l='ls -CF'
 alias my-explore='nautilus --no-desktop &'
@@ -44,3 +45,8 @@ alias my-ip="ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0
 #"ifconfig | grep "inet " | grep -v "127.\|172." | awk '{print $2}' | head -1 -"
 
 alias my-portlisten="sudo lsof -PiTCP -sTCP:LISTEN"
+
+
+alias xm='ssh -F $HOME/.ssh/xm/config'
+alias xms='scp -F $HOME/.ssh/xm/config'
+
