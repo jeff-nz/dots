@@ -1,5 +1,5 @@
 # dots
 
 <pre><code>
-bash install
+./install
 </code></pre>
