@@ -13,6 +13,7 @@ else
     echo "Please install extract go in "${HOME}/apps/go;
 fi
 
+export JAVA_HOME=/usr/lib/jvm/default
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then

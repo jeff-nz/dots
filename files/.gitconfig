@@ -8,3 +8,5 @@
 [merge]
 	renormalize = true
 	renamelimit = 4170
+[url "git@dbscanner.git:"]
+	insteadOf = https://dbscanner.git/
