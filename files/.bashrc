@@ -108,6 +108,10 @@ fi
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+
 
 # Aliases
 if [ -f ~/.bash_aliases ]; then
