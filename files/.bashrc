@@ -117,3 +117,8 @@ export XMODIFIERS=@im=fcitx
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
+
+# localfiles
+if [ -f ~/.bash_local ]; then
+    . ~/.bash_local
+fi
