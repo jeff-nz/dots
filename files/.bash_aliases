@@ -45,8 +45,8 @@ alias my-explore='nautilus --no-desktop &'
 alias my-ip="ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"
 #"ifconfig | grep "inet " | grep -v "127.\|172." | awk '{print $2}' | head -1 -"
 
-alias my-portlisten="sudo lsof -PiTCP -sTCP:LISTEN"
-
+alias my-portslisten="sudo lsof -PiTCP -sTCP:LISTEN"
+alias my-portsudp="sudo lsof -PiUDP"
 
 alias xm='ssh -F $HOME/.ssh/xm/config'
 alias xms='scp -F $HOME/.ssh/xm/config'
