@@ -10,7 +10,7 @@ if [ -d "/usr/local/go" ]; then
         echo "Please create a folder in "${HOME}/projects/go" for go workspace"
     fi
 else
-    echo "Please install extract go in /usr/local/go and ADD export PATH=\$PATH:/usr/local/go/bin into /etc/profile";
+    echo "Please install extract go in /usr/local/go and ADD export PATH=\$PATH:/usr/local/go/bin into etc/bash.bashrc";
 fi
 
 export JAVA_HOME=/usr/lib/jvm/default
