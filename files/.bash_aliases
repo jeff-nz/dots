@@ -1,7 +1,7 @@
 OS=`uname -s`;
 #GOLANG
-if [ -d ${HOME}"/apps/go" ]; then
-    export GOROOT=${HOME}/apps/go
+if [ -d "/usr/local/go" ]; then
+    export GOROOT=/usr/local/go
     export GOROOT_BOOTSTRAP=${GOROOT}
     export PATH=${PATH}:${GOROOT}/bin
     if [ -d ${HOME}"/projects/go" ]; then
@@ -11,7 +11,7 @@ if [ -d ${HOME}"/apps/go" ]; then
         echo "Please create a folder in "${HOME}/projects/go" for go workspace"
     fi
 else
-    echo "Please install extract go in "${HOME}/apps/go;
+    echo "Please install extract go in /usr/local/go";
 fi
 
 export JAVA_HOME=/usr/lib/jvm/default
