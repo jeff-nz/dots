@@ -3,7 +3,6 @@ OS=`uname -s`;
 if [ -d "/usr/local/go" ]; then
     export GOROOT=/usr/local/go
     export GOROOT_BOOTSTRAP=${GOROOT}
-    export PATH=${PATH}:${GOROOT}/bin
     if [ -d ${HOME}"/projects/go" ]; then
         export GOPATH=${HOME}/projects/go
         export GOBIN=${GOPATH}/bin
@@ -11,7 +10,7 @@ if [ -d "/usr/local/go" ]; then
         echo "Please create a folder in "${HOME}/projects/go" for go workspace"
     fi
 else
-    echo "Please install extract go in /usr/local/go";
+    echo "Please install extract go in /usr/local/go and ADD export PATH=\$PATH:/usr/local/go/bin into /etc/profile";
 fi
 
 export JAVA_HOME=/usr/lib/jvm/default
