@@ -18,7 +18,7 @@ fi
 # BoF - Java, sdkman Stuff
 export JAVA_HOME=/usr/lib/jvm/default
 
-my-setup-sdk-java() {
+my-setup-sdk-java () {
     echo "RUNNING ${FUNCNAME[0]}..."
 
     local SDK_JAVA_PATH="/home/jeff/.sdkman/candidates/java/current"
@@ -52,6 +52,25 @@ my-setup-sdk-java() {
 
     echo "COMPLETED RUNNING ${FUNCNAME[0]}"
 } # EoF - my-setup-sdk-java()
+
+
+
+xmRun () {
+    local DIRECTORY_NAME=$(basename ${PWD})
+    local CONTAINER_MEMORY=${1:-256}
+    local PROJECT_PROFILE=${2:-local,localdb,jeff}
+
+    if [ "${DIRECTORY_NAME}" == "config-daemon" ]; then
+        echo "RUNNING MVN on CONFIG DAEMON"
+        mvn clean package spring-boot:run -Dxmd.platform.config.git.uri=file://\$\{user.home\}/projects/xm/platform-central-configuration/
+        return 1
+    fi
+
+    echo "RUNNING MVN on ${DIRECTORY_NAME}"
+
+    MAVEN_OPTS="-Xmx256m" mvn clean package spring-boot:run -Dmaven.test.skip=true -Dxmd.platform.spring.jvm.args="-Xmx${CONTAINER_MEMORY}m -Dspring.profiles.active=${PROJECT_PROFILE}"
+} # EoF - xmRun()
+
 
 # EoF - Java, sdkman Stuff
 ##############
