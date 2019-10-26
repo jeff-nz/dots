@@ -113,7 +113,7 @@ export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 
 
-# Aliases
+# Aliases and helpers
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi

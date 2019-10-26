@@ -1,4 +1,5 @@
 OS=`uname -s`;
+#############
 #GOLANG
 if [ -d "/usr/local/go" ]; then
     export GOROOT=/usr/local/go
@@ -13,7 +14,48 @@ else
     echo "Please install extract go in /usr/local/go and ADD export PATH=\$PATH:/usr/local/go/bin into etc/bash.bashrc";
 fi
 
+##############
+# BoF - Java, sdkman Stuff
 export JAVA_HOME=/usr/lib/jvm/default
+
+my-setup-sdk-java() {
+    echo "RUNNING ${FUNCNAME[0]}..."
+
+    local SDK_JAVA_PATH="/home/jeff/.sdkman/candidates/java/current"
+    local LIB_DIR_JAVA="/usr/lib/jvm"
+    local LIB_DIR_DBEAVER="/usr/lib/dbeaver"
+
+    # making sure sdk_java exist
+    if [ ! -L "${SDK_JAVA_PATH}" ]; then
+        echo "ERROR: Please setup JAVA in SDK. ${SDK_JAVA_PATH} does not exist.";
+        return 1
+    fi
+    
+    # java lib
+    if [ -d "${LIB_DIR_JAVA}" ]; then
+        echo "Setting path in ${LIB_DIR_JAVA}";
+
+        sudo unlink "${LIB_DIR_JAVA}/default"
+        sudo ln -s /home/jeff/.sdkman/candidates/java/current "${LIB_DIR_JAVA}/default"
+
+        sudo unlink "${LIB_DIR_JAVA}/default-runtime"
+        sudo ln -s /home/jeff/.sdkman/candidates/java/current "${LIB_DIR_JAVA}/default-runtime"
+    fi
+
+    # dbeaver lib
+    if [ -d "${LIB_DIR_DBEAVER}" ]; then
+        echo "Setting path in ${LIB_DIR_DBEAVER}";
+
+        sudo unlink "${LIB_DIR_DBEAVER}/jre"
+        sudo ln -s /home/jeff/.sdkman/candidates/java/current "${LIB_DIR_DBEAVER}/jre"
+    fi
+
+    echo "COMPLETED RUNNING ${FUNCNAME[0]}"
+} # EoF - my-setup-sdk-java()
+
+# EoF - Java, sdkman Stuff
+##############
+
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
