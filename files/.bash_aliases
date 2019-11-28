@@ -59,16 +59,33 @@ xmRun () {
     local DIRECTORY_NAME=$(basename ${PWD})
     local CONTAINER_MEMORY=${1:-256}
     local PROJECT_PROFILE=${2:-local,localdb,jeff}
+    local MEMORY_LIMIT="128"
 
     if [ "${DIRECTORY_NAME}" == "config-daemon" ]; then
         echo "RUNNING MVN on CONFIG DAEMON"
-        mvn clean package spring-boot:run -Dxmd.platform.config.git.uri=file://\$\{user.home\}/projects/xm/platform-central-configuration/
+
+        MEMORY_LIMIT="64"
+        echo "RAM LIMIT: ${MEMORY_LIMIT}MB"
+
+        MAVEN_OPTS="-Xmx${MEMORY_LIMIT}m" mvn clean package spring-boot:run -Dxmd.platform.config.git.uri=file://\$\{user.home\}/projects/xm/platform-central-configuration/
         return 1
     fi
 
-    echo "RUNNING MVN on ${DIRECTORY_NAME}"
+    if [ "${DIRECTORY_NAME}" == "catalog-index" ]; then
+        MEMORY_LIMIT="1024"
+    fi
 
-    MAVEN_OPTS="-Xmx256m" mvn clean package spring-boot:run -Dmaven.test.skip=true -Dxmd.platform.spring.jvm.args="-Xmx${CONTAINER_MEMORY}m -Dspring.profiles.active=${PROJECT_PROFILE}"
+    if [ "${DIRECTORY_NAME}" == "customers" ]; then
+        MEMORY_LIMIT="256"
+    fi
+
+    if [ "${DIRECTORY_NAME}" == "catalog-search" ]; then
+        MEMORY_LIMIT="256"
+    fi
+
+    echo "RUNNING MVN on ${DIRECTORY_NAME}"
+    echo "RAM LIMIT: ${MEMORY_LIMIT}MB"
+    MAVEN_OPTS="-Xmx${MEMORY_LIMIT}m" mvn clean package spring-boot:run -Dmaven.test.skip=true -Dxmd.platform.spring.jvm.args="-Xmx${CONTAINER_MEMORY}m -Dspring.profiles.active=${PROJECT_PROFILE}"
 } # EoF - xmRun()
 
 
