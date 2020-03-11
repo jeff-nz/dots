@@ -21,7 +21,7 @@ export JAVA_HOME=/usr/lib/jvm/default
 my-setup-sdk-java () {
     echo "RUNNING ${FUNCNAME[0]}..."
 
-    local SDK_JAVA_PATH="/home/jeff/.sdkman/candidates/java/current"
+    local SDK_JAVA_PATH="/home/${USER}/.sdkman/candidates/java/current"
     local LIB_DIR_JAVA="/usr/lib/jvm"
     local LIB_DIR_DBEAVER="/usr/lib/dbeaver"
 
@@ -72,7 +72,7 @@ xmRun () {
     fi
 
     if [ "${DIRECTORY_NAME}" == "catalog-index" ]; then
-        MEMORY_LIMIT="1024"
+        MEMORY_LIMIT="4096"
     fi
 
     if [ "${DIRECTORY_NAME}" == "customers" ]; then
