@@ -1,3 +1,7 @@
+#############
+# INCLUDES
+# :set syn=bash - to show color on bash mode
+############# 
 OS=`uname -s`
 # Aliases and helpers
 if [ -f ~/.bash_aliases ]; then
