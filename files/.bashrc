@@ -110,13 +110,8 @@ export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 
-
-# Aliases and helpers
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+# Extension
+if [ -f ~/.bash_extensions ]; then
+    . ~/.bash_extensions
 fi
 
-# localfiles
-if [ -f ~/.bash_local ]; then
-    . ~/.bash_local
-fi
