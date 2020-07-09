@@ -78,10 +78,10 @@ xmRun () {
     if [ "${DIRECTORY_NAME}" == "config-daemon" ]; then
         echo "RUNNING MVN on CONFIG DAEMON"
 
-        MEMORY_LIMIT="64"
+        MEMORY_LIMIT="96"
         echo "RAM LIMIT: ${MEMORY_LIMIT}MB"
 
-        MAVEN_OPTS="-Xmx${MEMORY_LIMIT}m" mvn clean package spring-boot:run -Dxmd.platform.config.git.uri=file://\$\{user.home\}/projects/xm/platform-central-configuration/
+        MAVEN_OPTS="-Xmx${MEMORY_LIMIT}m" mvn clean package spring-boot:run -Dxmd.platform.config.local.dir=file://\$\{user.home\}/projects/xm/platform-central-configuration/
         return 1
     fi
 
