@@ -86,7 +86,8 @@ xmRun () {
     fi
 
     if [ "${DIRECTORY_NAME}" == "catalog-index" ]; then
-        MEMORY_LIMIT="4096"
+        MEMORY_LIMIT="2048"
+        CONTAINER_MEMORY="2048"
     fi
 
     if [ "${DIRECTORY_NAME}" == "customers" ]; then
