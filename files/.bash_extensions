@@ -68,6 +68,18 @@ my-setup-sdk-java () {
     echo "COMPLETED RUNNING ${FUNCNAME[0]}"
 } # EoF - my-setup-sdk-java()
 
+xmOpenTabs () {
+    SERVICES=("config-daemon" "stores-daemon" "settings" "customers" "oauth2" "prices" "stocks" "tagz" "catalog-index" "catalog-search")
+    for SERVICE in "${SERVICES[@]}"
+    do
+        DIR="/platform-services/${SERVICE}/${SERVICE}"
+        if [ "${SERVICE}" == "config-daemon" ] ; then
+            DIR="/${SERVICE}"
+        fi
+
+        terminator --new-tab --working-directory="~/projects/xm${DIR}"
+    done
+}
 
 xmRun () {
     local DIRECTORY_NAME=$(basename ${PWD})
