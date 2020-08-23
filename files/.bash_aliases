@@ -24,6 +24,7 @@ alias lla='ls -laFh'
 alias la='ls -AF'
 alias l='ls -CF'
 
+alias my-dd='sudo dd bs=1M status=progress'
 alias my-explore='nautilus --no-desktop &'
 alias my-ip="ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"
 alias my-public-ip="echo $(curl -s https://tools.webisometry.com/my-public-ip)"
@@ -33,6 +34,7 @@ alias my-setAuthorizedKeys="curl https://github.com/jeff-nz.keys > ~/.ssh/author
 
 alias my-portslisten="sudo lsof -PiTCP -sTCP:LISTEN"
 alias my-portsudp="sudo lsof -PiUDP"
+alias my-update-keyring="sudo pacman -Sy archlinux-keyring"
 
 alias xm='ssh -F $HOME/.ssh/xm/config'
 alias xms='scp -F $HOME/.ssh/xm/config'
