@@ -29,7 +29,7 @@ alias my-explore='nautilus --no-desktop &'
 alias my-ip="ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"
 alias my-public-ip="echo $(curl -s https://tools.webisometry.com/my-public-ip)"
 alias my-restart-shell="exec -l $SHELL"
-alias my-setAuthorizedKeys="curl https://github.com/jeff-nz.keys > ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys"
+alias my-setAuthorizedKeys="chmod 700 ~/.ssh && curl https://github.com/jeff-nz.keys > ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys"
 #"ifconfig | grep "inet " | grep -v "127.\|172." | awk '{print $2}' | head -1 -"
 
 alias my-portslisten="sudo lsof -PiTCP -sTCP:LISTEN"
