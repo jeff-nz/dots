@@ -86,6 +86,7 @@ xmRun () {
     local CONTAINER_MEMORY=${1:-256}
     local PROJECT_PROFILE=${2:-local,localdb,jeff}
     local MEMORY_LIMIT="128"
+    local CONFIG_FOLDER="/projects/xm/platform-central-configuration"
 
     if [ "${DIRECTORY_NAME}" == "config-daemon" ]; then
         echo "RUNNING MVN on CONFIG DAEMON"
@@ -93,7 +94,13 @@ xmRun () {
         MEMORY_LIMIT="96"
         echo "RAM LIMIT: ${MEMORY_LIMIT}MB"
 
-        MAVEN_OPTS="-Xmx${MEMORY_LIMIT}m" mvn clean package spring-boot:run -Dxmd.platform.config.local.dir=file://\$\{user.home\}/projects/xm/platform-central-configuration/
+        if [ ! -d "${HOME}${CONFIG_FOLDER}" ]; then
+            echo "Please update CONFIG_FOLDER setting."
+            echo "The directory for config does not exist: ${HOME}${CONFIG_FOLDER}"
+            return 1
+        fi
+
+        MAVEN_OPTS="-Xmx${MEMORY_LIMIT}m" mvn clean package spring-boot:run -Dxmd.platform.config.local.dir=file://\$\{user.home\}${CONFIG_FOLDER}/
         return 1
     fi
 
