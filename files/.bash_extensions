@@ -122,6 +122,22 @@ xmRun () {
     MAVEN_OPTS="-Xmx${MEMORY_LIMIT}m" mvn clean package spring-boot:run -Dmaven.test.skip=true -Dxmd.platform.spring.jvm.args="-Xmx${CONTAINER_MEMORY}m -Dspring.profiles.active=${PROJECT_PROFILE}"
 } # EoF - xmRun()
 
+xmPlatformPull () {
+    local PROJECT_DIR="${HOME}/projects/xm"
+    local SERVICES=("config-daemon" "platform-services" "platform-central-configuration")
+
+    for SERVICE in "${SERVICES[@]}"
+    do
+        DIR="${PROJECT_DIR}/${SERVICE}"
+        echo "<<<<<<<<<<<<<<<"
+        echo "Processing: ${DIR}"
+        cd ${DIR} && git pull && cd -
+        echo "Completed: ${DIR}"
+        echo ">>>>>>>>>>>>>>"
+    done
+
+}
+
 
 # EoF - Java, sdkman Stuff
 ##############
