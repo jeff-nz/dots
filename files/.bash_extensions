@@ -31,7 +31,11 @@ fi
 
 #############
 # BoF - Java, sdkman Stuff
-export JAVA_HOME=/usr/lib/jvm/default
+if [ "${OS}" == "Darwin" ]; then
+    export JAVA_HOME=$(/usr/libexec/java_home)
+else
+    export JAVA_HOME=/usr/lib/jvm/default
+fi
 
 my-setup-sdk-java () {
     echo "RUNNING ${FUNCNAME[0]}..."
