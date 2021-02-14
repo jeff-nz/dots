@@ -121,6 +121,11 @@ xmRun () {
         MEMORY_LIMIT="256"
     fi
 
+    if [ "${DIRECTORY_NAME}" == "platform-sync" ]; then
+        export GOOGLE_APPLICATION_CREDENTIALS=kubernetes/overlay/dev/serviceAccount/platform-27792316-070bf69e/synchronisation-27792316-4802b2af.json
+        echo "SETTING GOOGLE_APPLICATION_CREDENTIAL to ${GOOGLE_APPLICATION_CREDENTIALS}"
+    fi
+
     echo "RUNNING MVN on ${DIRECTORY_NAME}"
     echo "RAM LIMIT: ${MEMORY_LIMIT}MB"
     MAVEN_OPTS="-Xmx${MEMORY_LIMIT}m" mvn clean package spring-boot:run -Dmaven.test.skip=true -Dxmd.platform.spring.jvm.args="-Xmx${CONTAINER_MEMORY}m -Dspring.profiles.active=${PROJECT_PROFILE}"
