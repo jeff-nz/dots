@@ -36,6 +36,7 @@ alias my-setAuthorizedKeys="chmod 700 ~/.ssh && curl https://github.com/jeff-nz.
 
 alias my-portslisten="sudo lsof -PiTCP -sTCP:LISTEN"
 alias my-portsudp="sudo lsof -PiUDP"
+alias my-ramSpec="sudo lshw -c memory"
 alias my-top-memoryConsumption="ps -eo pmem,pcpu,vsize,pid,cmd | sort -k 1 -nr | head -10"
 alias my-update-keyring="sudo pacman -Sy archlinux-keyring"
 
