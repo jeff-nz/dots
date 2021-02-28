@@ -32,6 +32,7 @@ alias my-mci-notest="MAVEN_OPTS=\"-Xmx2048m -Xms1024m -Djava.awt.headless=true -
 alias my-public-ip="echo $(curl -s https://tools.webisometry.com/my-public-ip)"
 alias my-restart-shell="exec -l $SHELL"
 alias my-setAuthorizedKeys="chmod 700 ~/.ssh && curl https://github.com/jeff-nz.keys > ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys"
+alias my-syncDumpsFolder="rsync -av --progress /home/${USER}/dumps/* ${USER}@catcom:/home/${USER}/dumps"
 #"ifconfig | grep "inet " | grep -v "127.\|172." | awk '{print $2}' | head -1 -"
 
 alias my-portslisten="sudo lsof -PiTCP -sTCP:LISTEN"
