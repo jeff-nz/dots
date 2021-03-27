@@ -73,7 +73,7 @@ my-setup-sdk-java () {
 } # EoF - my-setup-sdk-java()
 
 xmOpenTabs () {
-    SERVICES=("config-daemon" "stores-daemon" "settings" "customers" "oauth2" "prices" "stocks" "tagz" "catalog-index" "catalog-search")
+    SERVICES=("config-daemon" "stores-daemon" "settings" "customers" "oauth2" "prices" "stocks" "tagz" "migration-daemon" "catalog-index" "catalog-search")
     for SERVICE in "${SERVICES[@]}"
     do
         DIR="/platform-services/${SERVICE}/${SERVICE}"
