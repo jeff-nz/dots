@@ -87,8 +87,8 @@ xmOpenTabs () {
 
 xmRun () {
     local DIRECTORY_NAME=$(basename ${PWD})
-    local CONTAINER_MEMORY=${1:-256}
-    local PROJECT_PROFILE=${2:-local,localdb,jeff}
+    local CONTAINER_MEMORY="256"
+    local PROJECT_PROFILE=local,localdb,jeff
     local MEMORY_LIMIT="256"
     local CONFIG_FOLDER="/projects/xm/platform-central-configuration"
 
@@ -122,7 +122,7 @@ xmRun () {
 
     echo "RUNNING MVN on ${DIRECTORY_NAME}"
     echo "RAM LIMIT: ${MEMORY_LIMIT}MB"
-    echo "CONTAINER LIMIT: ${CONTAINER_MEORY}MB"
+    echo "CONTAINER LIMIT: ${CONTAINER_MEMORY}MB"
     MAVEN_OPTS="-Xmx${MEMORY_LIMIT}m" mvn clean package spring-boot:run -Dmaven.test.skip=true -Dxmd.platform.spring.jvm.args="-Xmx${CONTAINER_MEMORY}m -Dspring.profiles.active=${PROJECT_PROFILE}"
 } # EoF - xmRun()
 
