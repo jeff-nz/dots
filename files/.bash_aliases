@@ -27,8 +27,8 @@ alias l='ls -CF'
 alias my-dd='sudo dd bs=512 status=progress'
 alias my-explore='nautilus --no-desktop &'
 alias my-ip="ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"
-alias my-mci="MAVEN_OPTS=\"-Xmx2048m -Xms1024m -Djava.awt.headless=true -XX:+TieredCompilation -XX:TieredStopAtLevel=1\" mvn -T 3 clean install"
-alias my-mci-notest="MAVEN_OPTS=\"-Xmx2048m -Xms1024m -Djava.awt.headless=true -XX:+TieredCompilation -XX:TieredStopAtLevel=1\" mvn -T 3 clean install -Dmaven.test.skip -DskipTests"
+alias my-mci="MAVEN_OPTS=\"-Xmx2048m -Xms1024m -Djava.awt.headless=true -XX:+TieredCompilation -XX:TieredStopAtLevel=1\" mvn -T 1C clean install"
+alias my-mci-notest="MAVEN_OPTS=\"-Xmx2048m -Xms1024m -Djava.awt.headless=true -XX:+TieredCompilation -XX:TieredStopAtLevel=1\" mvn -T 1C clean install -Dmaven.test.skip -DskipTests"
 alias my-public-ip="echo $(curl -s https://tools.webisometry.com/my-public-ip)"
 alias my-restart-shell="exec -l $SHELL"
 alias my-setAuthorizedKeys="chmod 700 ~/.ssh && curl https://github.com/jeff-nz.keys > ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys"

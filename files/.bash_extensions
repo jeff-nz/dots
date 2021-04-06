@@ -35,6 +35,8 @@ if [ "${OS}" == "Darwin" ]; then
     export JAVA_HOME=$(/usr/libexec/java_home)
 else
     export JAVA_HOME=/usr/lib/jvm/default
+    export CLOUDSDK_PYTHON=python2
+    export LD_LIBRARY_PATH=/usr/lib
 fi
 
 my-setup-sdk-java () {
