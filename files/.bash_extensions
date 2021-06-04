@@ -18,6 +18,7 @@ fi
 if [ -d "/usr/local/go" ]; then
     export GOROOT=/usr/local/go
     export GOROOT_BOOTSTRAP=${GOROOT}
+    export PATH=${PATH}:${GOROOT}/bin
     if [ -d ${HOME}"/projects/go" ]; then
         export GOPATH=${HOME}/projects/go
         export GOBIN=${GOPATH}/bin
