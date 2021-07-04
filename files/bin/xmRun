@@ -1,0 +1,171 @@
+#!/bin/bash
+
+prog=$(basename $0)
+prog_dir=$(dirname $0)
+white='\033[1;37m'
+red='\033[0;31m'
+yellow='\033[0;33m'
+green='\033[0;32m'
+nocolor='\033[0m'
+
+
+wrapper_bof () {
+    echo "<<<<<<<<<<<<<<<<";
+}
+
+wrapper_eof () {
+    echo ">>>>>>>>>>>>>>>>";
+}
+
+default () {
+    cmd_help
+}
+
+log () {
+    if [[ -n "$@" ]]
+    then
+        wrapper_bof
+        echo -e "${nocolor}$@"
+        wrapper_eof
+    fi
+}
+
+warning () {
+    if [[ -n "$@" ]]
+    then
+        wrapper_bof
+        echo -e "${red}WARN: ${yellow}$@${nocolor}"
+        wrapper_eof
+    fi
+}
+
+error () {
+    if [[ -n "$@" ]]
+    then
+        wrapper_bof
+        echo -e "${red}ERR: ${yellow}$@${nocolor}"
+        wrapper_eof
+    fi
+    exit 1 # Always exit on error
+}
+
+
+# The following shell functions are useful in a script which takes a first
+# parameter that's a command name.
+#
+# To use them, create shell functions for each such command, named
+# "cmd_<command-name>" which take the rest of the positional parameters as
+# arguments.  e.g. see cmd_help below.
+#
+# Then in your main script, just call run_cmd "$@"
+#
+
+run_cmd() {
+  if [[ $# -lt 1 ]]
+    then
+        default
+        error
+    fi
+    command=$1
+    shift
+
+  if [[ $(type -t cmd_$command) != "function" ]]
+    then
+    usage
+    error "Command not found: $command"
+  fi
+
+  cmd_$command "$@"
+}
+
+
+cmd_opentabs () {
+    local SERVICES=("config-daemon" "stores-daemon" "settings" "customers" "oauth2" "prices" "stocks" "tagz" "migration-daemon" "catalog-index" "catalog-search" "files" "file-processor-daemon")
+    
+    for SERVICE in "${SERVICES[@]}"
+    do
+        DIR="/platform-services/${SERVICE}/${SERVICE}"
+        if [ "${SERVICE}" == "config-daemon" ] ; then
+            DIR="/${SERVICE}"
+        fi
+        terminator --new-tab --working-directory="~/projects/xm${DIR}"
+    done
+}
+
+cmd_platform () {
+    local DIRECTORY_NAME=$(basename ${PWD})
+    local CONTAINER_MEMORY="256"
+    local PROJECT_PROFILE=local,localdb,jeff
+    local MEMORY_LIMIT="256"
+    local CONFIG_FOLDER="/projects/xm/platform-central-configuration"
+
+    if [ "${DIRECTORY_NAME}" == "config-daemon" ]; then
+        echo "RUNNING MVN on CONFIG DAEMON"
+
+        echo "RAM LIMIT: ${MEMORY_LIMIT}MB"
+
+        if [ ! -d "${HOME}${CONFIG_FOLDER}" ]; then
+            echo "Please update CONFIG_FOLDER setting."
+            echo "The directory for config does not exist: ${HOME}${CONFIG_FOLDER}"
+            return 1
+        fi
+
+        MAVEN_OPTS="-Xmx${MEMORY_LIMIT}m" mvn clean package spring-boot:run -Dxmd.platform.config.local.dir=file://\$\{user.home\}${CONFIG_FOLDER}/
+        return 1
+    fi
+
+    if [ "${DIRECTORY_NAME}" == "catalog-index" ] || [ "${DIRECTORY_NAME}" == "file-processor-daemon" ]; then
+        CONTAINER_MEMORY="2048"
+    fi
+
+    if [ "${DIRECTORY_NAME}" == "customers" ] || [ "${DIRECTORY_NAME}" == "catalog-search" ] || [ "${DIRECTORY_NAME}" == "files" ]; then
+        CONTAINER_MEMORY="256"
+    fi
+
+    if [ "${DIRECTORY_NAME}" == "platform-sync" ]; then
+        export GOOGLE_APPLICATION_CREDENTIALS=kubernetes/overlay/dev/serviceAccount/platform-27792316-070bf69e/synchronisation-27792316-4802b2af.json
+        echo "SETTING GOOGLE_APPLICATION_CREDENTIAL to ${GOOGLE_APPLICATION_CREDENTIALS}"
+    fi
+
+    echo "RUNNING MVN on ${DIRECTORY_NAME}"
+    echo "RAM LIMIT: ${MEMORY_LIMIT}MB"
+    echo "CONTAINER LIMIT: ${CONTAINER_MEMORY}MB"
+    MAVEN_OPTS="-Xmx${MEMORY_LIMIT}m" mvn clean package spring-boot:run -Dmaven.test.skip=true -Dxmd.platform.spring.jvm.args="-Xmx${CONTAINER_MEMORY}m -Dspring.profiles.active=${PROJECT_PROFILE}"
+} # EoF - xmRun()
+
+
+cmd_pull () {
+    local PROJECT_DIR="${HOME}/projects/xm"
+    local SERVICES=("config-daemon" "platform-services" "platform-central-configuration" "platform-sync")
+
+    for SERVICE in "${SERVICES[@]}"
+    do
+        DIR="${PROJECT_DIR}/${SERVICE}"
+        wrapper_bof
+        echo "Processing: ${DIR}"
+        cd ${DIR} && git pull && cd -
+        echo "Completed: ${DIR}"
+        wrapper_eof
+    done
+}
+
+
+cmd_help () {
+
+    echo "###########################"
+    echo "# List of all functions"
+    echo "###########################"
+    echo 'opentabs'
+    echo ' - runs terminator and opens tabs of all platform services in the list.'
+    echo ' '
+    echo 'platform'
+    echo ' - runs platform. needs to be in the correct folder'
+    echo ' '
+    echo 'pull'
+    echo ' - run git pull on all platform listed repo'
+    echo ' '
+
+}
+
+
+run_cmd "$@"

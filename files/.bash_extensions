@@ -29,6 +29,10 @@ else
     echo "Please install extract go in /usr/local/go and ADD export PATH=\$PATH:/usr/local/go/bin into etc/bash.bashrc";
 fi
 
+#############
+#${HOME}/bin
+export PATH=${PATH}:${HOME}/bin
+
 
 #############
 # BoF - Java, sdkman Stuff
@@ -75,59 +79,6 @@ my-setup-sdk-java () {
     echo "COMPLETED RUNNING ${FUNCNAME[0]}"
 } # EoF - my-setup-sdk-java()
 
-xmOpenTabs () {
-    SERVICES=("config-daemon" "stores-daemon" "settings" "customers" "oauth2" "prices" "stocks" "tagz" "migration-daemon" "catalog-index" "catalog-search" "files" "file-processor-daemon")
-    for SERVICE in "${SERVICES[@]}"
-    do
-        DIR="/platform-services/${SERVICE}/${SERVICE}"
-        if [ "${SERVICE}" == "config-daemon" ] ; then
-            DIR="/${SERVICE}"
-        fi
-
-        terminator --new-tab --working-directory="~/projects/xm${DIR}"
-    done
-}
-
-xmRun () {
-    local DIRECTORY_NAME=$(basename ${PWD})
-    local CONTAINER_MEMORY="256"
-    local PROJECT_PROFILE=local,localdb,jeff
-    local MEMORY_LIMIT="256"
-    local CONFIG_FOLDER="/projects/xm/platform-central-configuration"
-
-    if [ "${DIRECTORY_NAME}" == "config-daemon" ]; then
-        echo "RUNNING MVN on CONFIG DAEMON"
-
-        echo "RAM LIMIT: ${MEMORY_LIMIT}MB"
-
-        if [ ! -d "${HOME}${CONFIG_FOLDER}" ]; then
-            echo "Please update CONFIG_FOLDER setting."
-            echo "The directory for config does not exist: ${HOME}${CONFIG_FOLDER}"
-            return 1
-        fi
-
-        MAVEN_OPTS="-Xmx${MEMORY_LIMIT}m" mvn clean package spring-boot:run -Dxmd.platform.config.local.dir=file://\$\{user.home\}${CONFIG_FOLDER}/
-        return 1
-    fi
-
-    if [ "${DIRECTORY_NAME}" == "catalog-index" ] || [ "${DIRECTORY_NAME}" == "file-processor-daemon" ]; then
-        CONTAINER_MEMORY="2048"
-    fi
-
-    if [ "${DIRECTORY_NAME}" == "customers" ] || [ "${DIRECTORY_NAME}" == "catalog-search" ] || [ "${DIRECTORY_NAME}" == "files" ]; then
-        CONTAINER_MEMORY="256"
-    fi
-
-    if [ "${DIRECTORY_NAME}" == "platform-sync" ]; then
-        export GOOGLE_APPLICATION_CREDENTIALS=kubernetes/overlay/dev/serviceAccount/platform-27792316-070bf69e/synchronisation-27792316-4802b2af.json
-        echo "SETTING GOOGLE_APPLICATION_CREDENTIAL to ${GOOGLE_APPLICATION_CREDENTIALS}"
-    fi
-
-    echo "RUNNING MVN on ${DIRECTORY_NAME}"
-    echo "RAM LIMIT: ${MEMORY_LIMIT}MB"
-    echo "CONTAINER LIMIT: ${CONTAINER_MEMORY}MB"
-    MAVEN_OPTS="-Xmx${MEMORY_LIMIT}m" mvn clean package spring-boot:run -Dmaven.test.skip=true -Dxmd.platform.spring.jvm.args="-Xmx${CONTAINER_MEMORY}m -Dspring.profiles.active=${PROJECT_PROFILE}"
-} # EoF - xmRun()
 
 xmPlatformPull () {
     local PROJECT_DIR="${HOME}/projects/xm"
@@ -142,7 +93,6 @@ xmPlatformPull () {
         echo "Completed: ${DIR}"
         echo ">>>>>>>>>>>>>>"
     done
-
 }
 
 
