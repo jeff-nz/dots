@@ -25,29 +25,27 @@ default () {
 log () {
     if [[ -n "$@" ]]
     then
-        wrapper_bof
         echo -e "${nocolor}$@"
-        wrapper_eof
     fi
 }
 
 warning () {
     if [[ -n "$@" ]]
     then
-        wrapper_bof
         echo -e "${red}WARN: ${yellow}$@${nocolor}"
-        wrapper_eof
     fi
 }
 
 error () {
     if [[ -n "$@" ]]
     then
-        wrapper_bof
         echo -e "${red}ERR: ${yellow}$@${nocolor}"
-        wrapper_eof
     fi
-    exit 1 # Always exit on error
+}
+
+error_and_exit () {
+    error $@
+    exit 1
 }
 
 
@@ -65,7 +63,7 @@ run_cmd() {
   if [[ $# -lt 1 ]]
     then
         default
-        error
+        error_and_exit
     fi
     command=$1
     shift
@@ -73,7 +71,7 @@ run_cmd() {
   if [[ $(type -t cmd_$command) != "function" ]]
     then
     usage
-    error "Command not found: $command"
+    error_and_exit "Command not found: $command"
   fi
 
   cmd_$command "$@"
@@ -83,6 +81,7 @@ run_cmd() {
 cmd_opentabs () {
     local SERVICES=("config-daemon" "stores-daemon" "settings" "customers" "oauth2" "prices" "stocks" "tagz" "migration-daemon" "catalog-index" "catalog-search" "files" "file-processor-daemon")
     local INCLUDE_RUN=0
+    local SERVICE_PATH=""
 
     while test ${#} -gt 0; do
 	      case "${1}" in
@@ -114,10 +113,17 @@ cmd_opentabs () {
 
         wrapper_bof
         echo "Openning... ${SERVICE}"
+        SERVICE_PATH="${HOME}/projects/xm${DIR}"
+
+        if [ ! -d "${SERVICE_PATH}" ]; then
+            error "${SERVICE_PATH} - Directory does not exist."
+            continue
+        fi
+
         if [ "${INCLUDE_RUN}" == "1" ] ; then
-            terminator --new-tab --working-directory="~/projects/xm${DIR}" -e "bash -c '.  ~/.bash_extensions;cd ~/projects/xm'${DIR}'; ~/bin/xmRun platform; exec bash'"
+            terminator --new-tab --working-directory="${SERVICE_PATH}" -e "bash -c '.  ~/.bash_extensions;cd '${SERVICE_PATH}'; ~/bin/xmRun platform; exec bash'"
         else
-            terminator --new-tab --title ${SERVICE} --working-directory="~/projects/xm${DIR}"
+            terminator --new-tab --working-directory="${SERVICE_PATH}"
         fi
         wrapper_eof
     done
