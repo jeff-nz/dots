@@ -7,6 +7,7 @@ red='\033[0;31m'
 yellow='\033[0;33m'
 green='\033[0;32m'
 nocolor='\033[0m'
+OS=`uname -s`
 
 
 wrapper_bof () {
@@ -81,6 +82,28 @@ run_cmd() {
 
 cmd_opentabs () {
     local SERVICES=("config-daemon" "stores-daemon" "settings" "customers" "oauth2" "prices" "stocks" "tagz" "migration-daemon" "catalog-index" "catalog-search" "files" "file-processor-daemon")
+    local INCLUDE_RUN=0
+
+    while test ${#} -gt 0; do
+	      case "${1}" in
+            -h|--help)
+                echo "###########"
+                echo "# Args"
+                echo "###########"
+                echo "--include-run"
+                echo " - opens tab and runs each project"
+                exit 0
+                ;;
+            --include-run)
+                shift
+                    INCLUDE_RUN=1
+                shift
+                ;;
+            *)
+                break
+                ;;
+        esac
+    done
     
     for SERVICE in "${SERVICES[@]}"
     do
@@ -88,7 +111,15 @@ cmd_opentabs () {
         if [ "${SERVICE}" == "config-daemon" ] ; then
             DIR="/${SERVICE}"
         fi
-        terminator --new-tab --working-directory="~/projects/xm${DIR}"
+
+        wrapper_bof
+        echo "Openning... ${SERVICE}"
+        if [ "${INCLUDE_RUN}" == "1" ] ; then
+            terminator --new-tab --working-directory="~/projects/xm${DIR}" -e "bash -c '.  ~/.bash_extensions;cd ~/projects/xm'${DIR}'; ~/bin/xmRun platform; exec bash'"
+        else
+            terminator --new-tab --title ${SERVICE} --working-directory="~/projects/xm${DIR}"
+        fi
+        wrapper_eof
     done
 }
 
@@ -131,7 +162,7 @@ cmd_platform () {
     echo "RAM LIMIT: ${MEMORY_LIMIT}MB"
     echo "CONTAINER LIMIT: ${CONTAINER_MEMORY}MB"
     MAVEN_OPTS="-Xmx${MEMORY_LIMIT}m" mvn clean package spring-boot:run -Dmaven.test.skip=true -Dxmd.platform.spring.jvm.args="-Xmx${CONTAINER_MEMORY}m -Dspring.profiles.active=${PROJECT_PROFILE}"
-} # EoF - xmRun()
+} # EoF - cmd_platform()
 
 
 cmd_pull () {
@@ -151,7 +182,6 @@ cmd_pull () {
 
 
 cmd_help () {
-
     echo "###########################"
     echo "# List of all functions"
     echo "###########################"
@@ -164,7 +194,6 @@ cmd_help () {
     echo 'pull'
     echo ' - run git pull on all platform listed repo'
     echo ' '
-
 }
 
 
