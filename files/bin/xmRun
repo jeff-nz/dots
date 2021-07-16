@@ -192,13 +192,17 @@ cmd_help () {
     echo "# List of all functions"
     echo "###########################"
     echo 'opentabs'
-    echo ' - runs terminator and opens tabs of all platform services in the list.'
+    echo ' * runs terminator and opens tabs of all platform services in the list.'
+    echo '      --include-run '
+    echo '        * this param will include running the service'
     echo ' '
+    echo '-----------'
     echo 'platform'
-    echo ' - runs platform. needs to be in the correct folder'
+    echo ' * runs platform. needs to be in the correct folder'
     echo ' '
+    echo '-----------'
     echo 'pull'
-    echo ' - run git pull on all platform listed repo'
+    echo ' * run git pull on all platform listed repo'
     echo ' '
 }
 
