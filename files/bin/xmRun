@@ -173,7 +173,7 @@ cmd_platform () {
 
 cmd_pull () {
     local PROJECT_DIR="${HOME}/projects/xm"
-    local SERVICES=("config-daemon" "platform-services" "platform-central-configuration" "platform-sync")
+    local SERVICES=("config-daemon" "platform-services" "platform-central-configuration" "platform-sync" "infrastructure" "storephp" "storeadminphp" "store-react")
 
     for SERVICE in "${SERVICES[@]}"
     do
