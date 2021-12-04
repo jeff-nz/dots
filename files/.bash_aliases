@@ -24,7 +24,7 @@ alias lla='ls -laFh'
 alias la='ls -AF'
 alias l='ls -CF'
 
-alias my-dd='sudo dd bs=1536 status=progress'
+alias my-dd='sudo dd bs=2048 status=progress'
 alias my-explore='nautilus --no-desktop &'
 alias my-ip="ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"
 alias my-gpuAvailable="lspci -k | grep -EA3 'VGA|3D|Display'"
