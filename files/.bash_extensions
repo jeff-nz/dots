@@ -14,6 +14,16 @@ if [ -f ~/.bash_local ]; then
 fi
 
 #############
+# include bin-work Folder
+if [ -d "${HOME}/workutils/bin" ]; then
+    export PATH=${PATH}:${HOME}/workutils/bin
+fi
+
+if [ -f ~/workutils/.bash_aliases ]; then
+    . ~/workutils/.bash_aliases
+fi
+
+#############
 #GOLANG
 if [ -d "/usr/local/go" ]; then
     export GOROOT=/usr/local/go
