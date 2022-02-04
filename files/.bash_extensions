@@ -129,3 +129,24 @@ my-checkSSLCertExpiry() {
         echo ">>>>>>>>>>>>>>>>>>>>>>"
     done
 }
+
+
+my-getCertBasicInfo() {
+    for domain in "${@}"
+    do
+        echo "<<<<<<<<<<<<<<<<<<<<<<"
+        echo ${domain}
+        curl --insecure -vvI https://${domain} 2>&1 | awk 'BEGIN { cert=0 } /^\* SSL connection/ { cert=1 } /^\*/ { if (cert) print }'
+        echo ">>>>>>>>>>>>>>>>>>>>>>"
+    done
+}
+
+my-getCertFullInfo() {
+    for domain in "${@}"
+    do
+        echo "<<<<<<<<<<<<<<<<<<<<<<"
+        echo ${domain}
+        openssl s_client -connect ${domain}:443 </dev/null 2>/dev/null | openssl x509 -inform pem -text
+        echo ">>>>>>>>>>>>>>>>>>>>>>"
+    done
+}
