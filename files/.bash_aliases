@@ -24,6 +24,7 @@ alias lla='ls -laFh'
 alias la='ls -AF'
 alias l='ls -CF'
 
+alias my-addOpenVpnConfig='nmcli connection import type openvpn file'
 alias my-cpuStats='watch -n1 "grep \"^[c]pu MHz\" /proc/cpuinfo"'
 alias my-dd='sudo dd bs=2048 status=progress'
 alias my-explore='nautilus --no-desktop &'
