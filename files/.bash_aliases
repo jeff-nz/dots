@@ -29,6 +29,7 @@ alias my-cpuStats='watch -n1 "grep \"^[c]pu MHz\" /proc/cpuinfo"'
 alias my-dd='sudo dd bs=2048 status=progress'
 alias my-explore='nautilus --no-desktop &'
 alias my-ip="ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"
+alias my-generateRandomUUID="cat /proc/sys/kernel/random/uuid"
 alias my-gpuAvailable="lspci -k | grep -EA3 'VGA|3D|Display'"
 alias my-gpuOpenGL="glxinfo | grep OpenGL"
 alias my-mci="MAVEN_OPTS=\"-Xmx2048m -Xms1024m -Djava.awt.headless=true -XX:+TieredCompilation -XX:TieredStopAtLevel=1\" mvn -T 1C clean install"
