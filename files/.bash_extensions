@@ -114,10 +114,14 @@ myNetSpeed () {
     for i in $(netstat -i | cut -f1 -d" " | tail -n+3) ; do echo "$i: $(sudo ethtool "$i" | grep Speed | sed 's/Speed://g')" ; done
 }
 
+
 my-addWideScreenResolution() {
     bash -c 'xrandr --newmode "2560x1080_60.00"  230.76  2560 2728 3000 3440  1080 1081 1084 1118  -HSync +Vsync'
     bash -c 'xrandr --addmode HDMI1 "2560x1080_60.00"'
     bash -c 'xrandr --output HDMI1 --mode "2560x1080_60.00"'
+
+    bash -c 'xrandr --addmode HDMI-1 "2560x1080_60.00"'
+    bash -c 'xrandr --output HDMI-1 --mode "2560x1080_60.00"'
 }
 
 my-checkSSLCertExpiry() {

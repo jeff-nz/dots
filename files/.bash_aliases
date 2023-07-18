@@ -46,6 +46,7 @@ alias my-portsudp="sudo lsof -PiUDP"
 alias my-ramSpec="sudo lshw -c memory"
 alias my-top-memoryConsumption="ps -eo pmem,pcpu,vsize,pid,cmd | sort -k 1 -nr | head -10"
 alias my-update-keyring="sudo pacman -Sy archlinux-keyring"
+alias my-update-system="sudo pacman -Sy archlinux-keyring && sudo pacman -Syu"
 
 alias xm='ssh -F $HOME/.ssh/xm/config'
 alias xms='scp -F $HOME/.ssh/xm/config'
