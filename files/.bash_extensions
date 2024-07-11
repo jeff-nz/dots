@@ -124,6 +124,17 @@ my-addWideScreenResolution() {
     bash -c 'xrandr --output HDMI-1 --mode "2560x1080_60.00"'
 }
 
+
+my-addWideScreenResolution4k() {
+    bash -c 'xrandr --newmode "3440x1440_36.00"  260.50  3440 3640 4008 4576  1440 1443 1453 1469 -hsync +vsync'
+    bash -c 'xrandr --addmode HDMI1 "3440x1440_36.00"'
+    bash -c 'xrandr --output HDMI1 --mode "3440x1440_36.00"'
+
+    bash -c 'xrandr --addmode HDMI-1 "3440x1440_36.00"'
+    bash -c 'xrandr --output HDMI-1 --mode "3440x1440_36.00"'
+}
+
+
 my-checkSSLCertExpiry() {
     for domain in "${@}"
     do
