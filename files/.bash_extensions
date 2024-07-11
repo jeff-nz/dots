@@ -126,7 +126,7 @@ my-addWideScreenResolution() {
 
 
 my-addWideScreenResolution4k() {
-    bash -c 'xrandr --newmode "3440x1440_36.00"  260.50  3440 3640 4008 4576  1440 1443 1453 1469 -hsync +vsync'
+    bash -c 'xrandr --newmode "3440x1440_36.00"  260.50  3440 3640 4008 4576  1440 1443 1453 1469 -Hsync +Vsync'
     bash -c 'xrandr --addmode HDMI1 "3440x1440_36.00"'
     bash -c 'xrandr --output HDMI1 --mode "3440x1440_36.00"'
 
